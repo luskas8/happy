@@ -6,9 +6,9 @@ Esta aplicação está sendo desenvolvida junto da **NVL#3-_Next Level Week 3° 
 
 Bem se ela ta com algumas coisinhas diferentes, pensei em diferenciar nisso e usar um pouco também de combinações diferentes :)
 
-![Index page](/info/index_page.png)
+> ![Index page](/info/index_page.png)
 > Essa é a página de início dela. Com algumas mexidas aqui e ali, mudei as cores tanto do fundo quanto do SVG das crianças.
 > - _Adorei mudar esses SVGs_
 
-![View orphanates page](/info/view_orphanates_page.png)
+> ![View orphanates page](/info/view_orphanates_page.png)
 > E a tela de visualização de orfanatos, por enquanto tem pouca coisa mas ao decorrer dos dias vai se preenchedo...
