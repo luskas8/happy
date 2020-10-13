@@ -1,0 +1,20 @@
+:root {
+    --color-gradient: linear-gradient(329.54deg, #9764db 0%, #d57f33 100%);
+    --color-khaki: #D6A015;
+    --color-light-khaki: #EBBC17;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    color: #FFF;
+    background-color: #ebf2f5;
+}
+
+body, input, button, textarea {
+    font: 600 18px Nunito, sans-serif;
+}
