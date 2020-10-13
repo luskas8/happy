@@ -1,39 +1,42 @@
 import { Request, Response } from 'express';
 import { getRepository } from 'typeorm';
+import orphanateView from '../views/orphanates_view';
 
-import Orphanate from '../models/orphanate';
+import Orphanate from '../models/Orphanate';
 
 export default {
     async index(request: Request, response: Response) {
         const orphanatesRepositoty = getRepository(Orphanate);
 
-        const orphanates = await orphanatesRepositoty.find();
+        const orphanates = await orphanatesRepositoty.find({
+            relations: ['images'],
+        });
 
-        return response.json(orphanates);
+        return response.json(orphanateView.renderMany(orphanates));
     },
 
     async show(request: Request, response: Response) {
         const { id } = request.params;
         const orphanatesRepositoty = getRepository(Orphanate);
 
-        const orphanate = await orphanatesRepositoty.findOneOrFail({id});
+        const orphanate = await orphanatesRepositoty.findOneOrFail(id, {
+            relations: ['images'],
+        });
 
-        return response.json(orphanate);
+        return response.json(orphanateView.render(orphanate));
     },
 
     async create(request: Request, response: Response) {
-        console.log(request.files);
-
         // Desestrutura corpo da requisição
         const { name, latitude, longitude, about, instructions, opening_hours, open_on_weekend } = request.body;
         
         const orphanatesRepositoty = getRepository(Orphanate);
 
-        // const requestImages = request.files as Express.Multer.File[];
+        const requestImages = request.files as Express.Multer.File[];
 
-        // const images = requestImages.map(image => {
-        //     return { path: image.filename };
-        // })
+        const images = requestImages.map(image => {
+            return { path: image.filename };
+        })
         
         const orphanate = orphanatesRepositoty.create({
             name,
@@ -43,7 +46,7 @@ export default {
             instructions,
             opening_hours,
             open_on_weekend,
-            // images
+            images
         });
     
         await orphanatesRepositoty.save(orphanate);
