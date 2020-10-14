@@ -2,6 +2,9 @@
     --color-gradient: linear-gradient(329.54deg, #9764db 0%, #d57f33 100%);
     --color-khaki: #D6A015;
     --color-light-khaki: #EBBC17;
+    --color-purple: #9764db;
+    --color-btn: #8512CB;
+    --color-btn-hover: #B417EB;
 }
 
 * {

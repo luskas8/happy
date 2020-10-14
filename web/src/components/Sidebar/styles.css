@@ -1,0 +1,39 @@
+.app-siderbar {
+    position: fixed;
+    height: 100%;
+    padding: 32px 24px;
+    background: var(--color-khaki);
+  
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .app-siderbar img {
+    width: 48px;
+  }
+  
+  .app-siderbar footer a,
+  .app-siderbar footer button {
+    width: 48px;
+    height: 48px;
+  
+    border: 0;
+  
+    background: var(--color-btn);
+    border-radius: 16px;
+  
+    cursor: pointer;
+  
+    transition: background-color 0.2s;
+  
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .app-siderbar footer a:hover,
+  .app-siderbar footer button:hover {
+    background: var(--color-btn-hover);
+  }
