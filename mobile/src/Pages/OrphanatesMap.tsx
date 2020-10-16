@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { StyleSheet, Text, View, Dimensions, TouchableOpacity } from 'react-native';
 import MapView , { PROVIDER_GOOGLE, Marker, Callout } from 'react-native-maps';
 import { Feather } from '@expo/vector-icons';
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation, useFocusEffect } from '@react-navigation/native';
 
 import api from '../services/api';
 
@@ -17,12 +17,12 @@ interface Orphanate {
 
 function OrphantesMap() {
   const [orphanates, setOrphanates] = useState<Orphanate[]>([]);
-    useEffect(() => {
+  useFocusEffect(() => {
       api.get('orphanates')
             .then(response => {
                 setOrphanates(response.data);
             })
-    }, []);
+    });
     const navigation = useNavigation();
 
     function handleNavigateToOrphanateDetails(id: number) {

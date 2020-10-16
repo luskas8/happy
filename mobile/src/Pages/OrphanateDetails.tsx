@@ -4,10 +4,11 @@ import MapView, { Marker } from 'react-native-maps';
 import { Feather, /* FontAwesome */ } from '@expo/vector-icons';
 // import { RectButton } from 'react-native-gesture-handler';
 import { useRoute } from '@react-navigation/native';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
 import mapMarkerImg from '../images/map-marker.png';
+
 import api from '../services/api';
-import { TouchableOpacity } from 'react-native-gesture-handler';
 
 interface Orphanate {
   latitude: number;
@@ -55,7 +56,6 @@ export default function OrphanateDetails() {
       <View style={styles.imagesContainer}>
         <ScrollView horizontal pagingEnabled>
           { orphanate.images.map(image => {
-            console.log(image.url)
             return (
               <Image key={image.id} style={styles.image} source={{ uri: image.url }} />
             );
