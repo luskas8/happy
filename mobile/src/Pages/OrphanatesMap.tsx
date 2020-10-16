@@ -25,11 +25,11 @@ function OrphantesMap() {
     }, []);
     const navigation = useNavigation();
 
-    function handleNavigateToCreateOrphanate() {
+    function handleNavigateToOrphanateDetails() {
         navigation.navigate('OrphanateDetails');
     }
 
-    function handleNavigateToSelectMapPosition() {
+    function handleNavigateToCreateOrphante() {
         navigation.navigate('SelectMapPosition');
     }
 
@@ -40,34 +40,41 @@ function OrphantesMap() {
           style={styles.map}
           initialRegion={
             {
-              latitude: -24.1041408,
+              latitude: -24.100864,
               longitude:-46.6550784,
               latitudeDelta: 0.008,
               longitudeDelta: 0.008,
             }}
         >
-          <Marker
-            icon={mapMarker}
-            calloutAnchor={{
-              x: 3,
-              y: 1,
-            }}
-            coordinate={{
-              latitude: -24.1041408,
-              longitude:-46.6550784,
-            }}
-          >
-            <Callout tooltip onPress={handleNavigateToCreateOrphanate}>
-              <View style={styles.calloutContainer}>
-              <Text style={styles.calloutText}>Lar das meninas</Text>
-              </View>
-            </Callout>
-          </Marker>
+          {
+            orphanates.map(orphanate => {
+              return (
+                <Marker
+                  key={orphanate.id}
+                  icon={mapMarker}
+                  calloutAnchor={{
+                    x: 3,
+                    y: 1,
+                  }}
+                  coordinate={{
+                    latitude: orphanate.latitude,
+                    longitude:orphanate.longitude,
+                  }}
+                >
+                  <Callout tooltip onPress={handleNavigateToOrphanateDetails}>
+                    <View style={styles.calloutContainer}>
+                      <Text style={styles.calloutText}>{orphanate.name}</Text>
+                    </View>
+                  </Callout>
+                </Marker>
+              )
+            })
+          }
         </MapView>
   
         <View style={styles.footer}>
           <Text style={styles.footerText}>2 orfanatos encontrados</Text>
-            <TouchableOpacity style={styles.createOrphanateButton} onPress={handleNavigateToSelectMapPosition}>
+            <TouchableOpacity style={styles.createOrphanateButton} onPress={handleNavigateToCreateOrphante}>
               <Feather name="plus" size={20} color="#FFF" />
             </TouchableOpacity>
         </View>
