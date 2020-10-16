@@ -1,16 +1,36 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { StyleSheet, Text, View, Dimensions, TouchableOpacity } from 'react-native';
 import MapView , { PROVIDER_GOOGLE, Marker, Callout } from 'react-native-maps';
 import { Feather } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
 
+import api from '../services/api';
+
 import mapMarker from '../images/map-marker.png';
 
+interface Orphanate {
+  id: number;
+  latitude: number;
+  longitude: number;
+  name: string;
+}
+
 function OrphantesMap() {
+  const [orphanates, setOrphanates] = useState<Orphanate[]>([]);
+    useEffect(() => {
+      api.get('orphanates')
+            .then(response => {
+                setOrphanates(response.data);
+            })
+    }, []);
     const navigation = useNavigation();
 
-    function handleNavigateToOrphanateDetails() {
+    function handleNavigateToCreateOrphanate() {
         navigation.navigate('OrphanateDetails');
+    }
+
+    function handleNavigateToSelectMapPosition() {
+        navigation.navigate('SelectMapPosition');
     }
 
     return (
@@ -37,7 +57,7 @@ function OrphantesMap() {
               longitude:-46.6550784,
             }}
           >
-            <Callout tooltip onPress={handleNavigateToOrphanateDetails}>
+            <Callout tooltip onPress={handleNavigateToCreateOrphanate}>
               <View style={styles.calloutContainer}>
               <Text style={styles.calloutText}>Lar das meninas</Text>
               </View>
@@ -47,7 +67,7 @@ function OrphantesMap() {
   
         <View style={styles.footer}>
           <Text style={styles.footerText}>2 orfanatos encontrados</Text>
-            <TouchableOpacity style={styles.createOrphanateButton} onPress={() => {}}>
+            <TouchableOpacity style={styles.createOrphanateButton} onPress={handleNavigateToSelectMapPosition}>
               <Feather name="plus" size={20} color="#FFF" />
             </TouchableOpacity>
         </View>
