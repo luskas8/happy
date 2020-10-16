@@ -25,8 +25,8 @@ function OrphantesMap() {
     }, []);
     const navigation = useNavigation();
 
-    function handleNavigateToOrphanateDetails() {
-        navigation.navigate('OrphanateDetails');
+    function handleNavigateToOrphanateDetails(id: number) {
+        navigation.navigate('OrphanateDetails', { id });
     }
 
     function handleNavigateToCreateOrphante() {
@@ -61,19 +61,19 @@ function OrphantesMap() {
                     longitude:orphanate.longitude,
                   }}
                 >
-                  <Callout tooltip onPress={handleNavigateToOrphanateDetails}>
+                  <Callout tooltip onPress={() => handleNavigateToOrphanateDetails(orphanate.id)}>
                     <View style={styles.calloutContainer}>
                       <Text style={styles.calloutText}>{orphanate.name}</Text>
                     </View>
                   </Callout>
                 </Marker>
-              )
+              );
             })
           }
         </MapView>
   
         <View style={styles.footer}>
-          <Text style={styles.footerText}>2 orfanatos encontrados</Text>
+          <Text style={styles.footerText}>{orphanates.length} orfanatos encontrados</Text>
             <TouchableOpacity style={styles.createOrphanateButton} onPress={handleNavigateToCreateOrphante}>
               <Feather name="plus" size={20} color="#FFF" />
             </TouchableOpacity>
